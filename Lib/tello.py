@@ -53,7 +53,7 @@ class tello():
         # Send data
         cmd_old = cmd
         cmd = cmd.encode(encoding="utf-8") 
-        sent = self.sock.sendto(cmd, self.tello_address)
+        sent = self.sock.sendto(bytes(cmd), self.tello_address)
         if(printcmd == 1):
             print(str(cmd))
     def read_battery_level(self):
@@ -171,7 +171,7 @@ class tello():
                     x = infos[1][1]
                     y = infos[2][1]
                     z = infos[3][1]
-                    if(not(str(mid) in self.missionpads)):
+                    if(not str(mid) in self.missionpads):
                         print("MissionPad " + str(mid) + " registrated at:\nx: " + x + "\ny: " + y + "\nz: " + z)
                     self.missionpads[str(mid)] = {
                         "x-position":x,
@@ -215,32 +215,32 @@ class tello():
         else:
             raise ValueError("Not in range")
     def up(self, distance):
-        if(speed < 501 and speed > 19):
+        if(distance < 501 and distance > 19):
             self.cmd("up " + str(distance))
         else:
             raise ValueError("Not in range")
     def down(self, distance):
-        if(speed < 501 and speed > 19):
+        if(distance < 501 and distance > 19):
             self.cmd("down  " + str(distance))
         else:
             raise ValueError("Not in range")
     def left(self, distance):
-        if(speed < 501 and speed > 19):
+        if(distance < 501 and distance > 19):
             self.cmd("left " + str(distance))
         else:
             raise ValueError("Not in range")
     def right(self, distance):
-        if(speed < 501 and speed > 19):
+        if(distance < 501 and distance > 19):
             self.cmd("right " + str(distance))
         else:
             raise ValueError("Not in range")
     def forward(self, distance):
-        if(speed < 501 and speed > 19):
+        if(distance < 501 and distance > 19):
             self.cmd("forward " + str(distance))
         else:
             raise ValueError("Not in range")
     def backward(self, distance):
-        if(speed < 501 and speed > 19):
+        if(distance < 501 and distance > 19):
             self.cmd("back  " + str(distance))
         else:
             raise ValueError("Not in range")
