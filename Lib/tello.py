@@ -194,12 +194,12 @@ class tello():
         self.cmd("takeoff")
     def land(self):
         self.cmd("land")
-    def goToMP(self, mid, speed):
+    def goToMP(self, mid, speed=100):
         mx = self.missionpads[str(mid)]["x-position"]
         my = self.missionpads[str(mid)]["y-position"]
         mz = self.missionpads[str(mid)]["z-position"]
         mid = "m" + str(mid)
-        drone.cmd("go " + mx + " "  + my + " " + mz + " " + speed + " " + mid)
+        drone.cmd("go " + str(mx) + " "  + str(my) + " " + str(mz) + " " + str(speed) + " " + str(mid))
     def MPR(self):
         MPRThread = threading.Thread(target=self._MP_registrator)
         MPRThread.start()
