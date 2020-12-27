@@ -4,7 +4,7 @@ This simple Library should help you controlling the TELLO EDU over WiFi with Pyt
 Tested on Windows 10.
 
 ## How to import
-```
+```python
 from tello import tello
 drone = tello([port=8890, ip="192.168.10.1"])
 ```
