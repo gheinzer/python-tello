@@ -73,3 +73,42 @@ drone.flip(direction)
 ```
 #### Direction
 Required. The flip direction. Has to be `r` (for right), `l` (for left), `f` (for forward) or `b` (for backward).
+### Rotate
+```python
+drone.rotate(direction, degrees)
+```
+#### Direction
+Required. The rotating direction. Can be  `cw` (for clockwise) or `ccw` (for counterclockwise)
+#### Degrees
+Required. The number of degrees to rotate. Has to be between 1 and 360.
+### MissionPad Registrator (MPR)
+```python
+drone.MPR()
+```
+Starts the MissionPad Registrator in a new Thread. This is a Function for registrating MissionPads in both directions (forward and downward). When a MissionPad is found, it will be added to `drone.missionpads` (Dictionary). `drone.missionpads` will look like that:
+```python
+{
+        "1":
+            {
+                "x-position": 0
+                "y-position": 0
+                "z-position": 0
+            }
+        "8":
+            {
+                "x-position": 5
+                "y-position": -3
+                "z-position": 12
+            }
+        }
+```
+If no MissionPad has been found, this dictionary will be empty. You should be able to send other Commands to the drone while MPR is looking for MissionPads. Every time a new MissionPad has been found, a Text with the ID and the x-, y- and z-position will be printed to the Shell.
+### Fly to a MissionPad
+```python
+drone.goToMP(mid[, speed=100])
+```
+You have to start MPR to use this Method. If the MissionPad isn't registrated in `drone.missionpads`, a Exception will raise.
+#### Mid
+Required. The ID of the Mission Pad.
+#### Speed
+Optional. The speed to fly to thy MissionPad. Default is 100.
