@@ -14,6 +14,13 @@ Optional. Sets the port for controlling Tello and reading Data. Default is 8890.
 Optional. The IP adress for controlling Tello and reading Data. Default is 192.168.10.1.
 
 ## Methods
+### Send a Command to the Drone
+```python
+drone.cmd(command)
+```
+You can send a command like `up 99` to the drone with `drone.cmd()`
+#### Command
+Required. The Command to send to the drone.
 ### Takeoff
 ```python
 drone.takeoff()
