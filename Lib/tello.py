@@ -1,13 +1,10 @@
 """
 Library for controlling the Tello EDU.
 """
-
 import socket
 import sys
 import time
 import threading
-import json
-from console_progressbar import ProgressBar
 
 class tello():
     missionpads = {}
@@ -47,8 +44,8 @@ class tello():
         data, server = self.sock.recvfrom(1518)
         data, server = self.sock.recvfrom(1518)
         try:
-            states = self.state_decoder(data)
-            self.battery = int(states[14][1])
+            infos = self.state_decoder(data)
+            self.battery = int(infos[14][1])
             print("BATTERY STATE: " + str(self.battery) + "%")
         except:
             pass
@@ -75,9 +72,9 @@ class tello():
             ok = ""
             data, server = self.sock.recvfrom(1518)
             try:
-                states = self.state_decoder(data)
+                infos = self.state_decoder(data)
                 print(str(data))
-                if(int(states[0][1]) > -1):
+                if(int(infos[0][1]) > -1):
                     print("MissionPad discovered. MissionPad-ID: " + data)
             except:
                 pass
@@ -87,9 +84,9 @@ class tello():
         ok = ""
         data, server = self.sock.recvfrom(1518)
         try:
-            states = self.state_decoder(data)
-            if(int(states[0][1]) > -1):
-                return int(states[0][1])
+            infos = self.state_decoder(data)
+            if(int(infos[0][1]) > -1):
+                return int(infos[0][1])
             else:
                 return -1
         except:
@@ -102,8 +99,7 @@ class tello():
             state[int(y)] = x.split(":")
             y += 1
         return state
-    def MP_registrator(self, battery=1):
-        
+    def MP_registrator(self):
         self.cmd("mon")
         time.sleep(1)
         self.cmd("mdirection 2")
@@ -143,18 +139,17 @@ class tello():
         Each of the items is an array, the first item returns the key, the second the value.
         """
         self.tello_address2 = ("192.168.10.1", 8890)
-        x = 0
         logged_battery_30 = 0
         logged_battery_20 = 0
         while 1:
             data, server = self.sock.recvfrom(1518)
             try:
-                states = self.state_decoder(data)
-                if(int(states[0][1]) > -1):
-                    mid = states[0][1]
-                    x = states[1][1]
-                    y = states[2][1]
-                    z = states[3][1]
+                infos = self.state_decoder(data)
+                if(int(infos[0][1]) > -1):
+                    mid = infos[0][1]
+                    x = infos[1][1]
+                    y = infos[2][1]
+                    z = infos[3][1]
                     if(not(str(mid) in self.missionpads)):
                         print("MissionPad " + str(mid) + " registrated at:\nx: " + x + "\ny: " + y + "\nz: " + z)
                     self.missionpads[str(mid)] = {
@@ -162,7 +157,28 @@ class tello():
                         "y-position":y,
                         "z-position":z
                         }
-                self.battery = int(states[14][1])
+            except:
+                pass
+    def BatteryChecker(self):
+        logged_battery_30 = 0
+        logged_battery_20 = 0
+        while 1:
+            data, server = self.sock.recvfrom(1518)
+            try:
+                infos = self.state_decoder(data)
+                if(int(infos[0][1]) > -1):
+                    mid = infos[0][1]
+                    x = infos[1][1]
+                    y = infos[2][1]
+                    z = infos[3][1]
+                    if(not(str(mid) in self.missionpads)):
+                        print("MissionPad " + str(mid) + " registrated at:\nx: " + x + "\ny: " + y + "\nz: " + z)
+                    self.missionpads[str(mid)] = {
+                        "x-position":x,
+                        "y-position":y,
+                        "z-position":z
+                        }
+                self.battery = int(infos[14][1])
                 if(int(self.battery) < 30 and logged_battery_30 == 0):
                     print("WARNING: The Battery level of your Tello EDU is under 30 %. If it sinks under 20 %, the drone will land automatically")
                     logged_battery_30 = 1
