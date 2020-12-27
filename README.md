@@ -31,15 +31,45 @@ drone.setSpeed(speed)
 Set the speed of the drone in cm/s.
 #### Speed
 Required. The Speed to set. Has to be between 10 and 100.
-### Ascend
+### Fly up
 ```python
 drone.up(distance)
 ```
 #### Distance
 Required. The distance to ascend in cm. Has to be between 20 and 500.
-### Descend
+### Fly down
 ```python
 drone.down(distance)
 ```
 #### Distance
 Required. The distance to descend in cm. Has to be between 20 and 500.
+### Fly forward
+```python
+drone.forward(distance)
+```
+#### Distance
+Required. The distance to fly forward in cm. Has to be between 20 and 500.
+### Fly backward
+```python
+drone.backward(distance)
+```
+#### Distance
+Required. The distance to fly backward in cm. Has to be between 20 and 500.
+### Fly right
+```python
+drone.right(distance)
+```
+#### Distance
+Required. The distance to fly right in cm. Has to be between 20 and 500.
+### Fly left
+```python
+drone.left(distance)
+```
+#### Distance
+Required. The distance to fly left in cm. Has to be between 20 and 500.
+### Make a Flip
+```python
+drone.flip(direction)
+```
+#### Direction
+Required. The flip direction. Has to be `r` (for right), `l` (for left), `f` (for forward) or `b` (for backward).
