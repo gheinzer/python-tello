@@ -18,9 +18,9 @@ class tello():
             except Exception:
                 print ('\nExit . . .\n')
                 break
-    def __init__(self, port=8889, address="192.168.10.1"):
+    def __init__(self, port=8890, address="192.168.10.1"):
         host = '0.0.0.0'
-        port = 8890
+        port = port
         locaddr = (host,port) 
 
 
