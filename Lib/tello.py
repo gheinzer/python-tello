@@ -209,3 +209,17 @@ class tello():
     def startBatteryChecker(self):
         BatterryCheckerThread = threading.Thread(target=self._BatteryChecker)
         BatterryCheckerThread.start()
+    def setSpeed(self, speed):
+        self.cmd("speed " + str(speed))
+    def up(self, distance):
+        self.cmd("up " + str(distance))
+    def down(self, distance):
+        self.cmd("down  " + str(distance))
+    def left(self, distance):
+        self.cmd("left " + str(distance))
+    def right(self, distance):
+        self.cmd("right " + str(distance))
+    def forward(self, distance):
+        self.cmd("forward " + str(distance))
+    def backward(self, distance):
+        self.cmd("back  " + str(distance))
