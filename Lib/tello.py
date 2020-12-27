@@ -46,7 +46,7 @@ class tello():
         try:
             infos = self.state_decoder(data)
             self.battery = int(infos[14][1])
-            print("BATTERY STATE: " + str(self.battery) + "%")
+            #print("BATTERY STATE: " + str(self.battery) + "%")
         except:
             pass
     def cmd(self, cmd, printcmd=0):
