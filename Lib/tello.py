@@ -210,16 +210,50 @@ class tello():
         BatterryCheckerThread = threading.Thread(target=self._BatteryChecker)
         BatterryCheckerThread.start()
     def setSpeed(self, speed):
-        self.cmd("speed " + str(speed))
+        if(speed < 101 and speed > 9):
+            self.cmd("speed " + str(speed))
+        else:
+            raise ValueError("Not in range")
     def up(self, distance):
-        self.cmd("up " + str(distance))
+        if(speed < 501 and speed > 19):
+            self.cmd("up " + str(distance))
+        else:
+            raise ValueError("Not in range")
     def down(self, distance):
-        self.cmd("down  " + str(distance))
+        if(speed < 501 and speed > 19):
+            self.cmd("down  " + str(distance))
+        else:
+            raise ValueError("Not in range")
     def left(self, distance):
-        self.cmd("left " + str(distance))
+        if(speed < 501 and speed > 19):
+            self.cmd("left " + str(distance))
+        else:
+            raise ValueError("Not in range")
     def right(self, distance):
-        self.cmd("right " + str(distance))
+        if(speed < 501 and speed > 19):
+            self.cmd("right " + str(distance))
+        else:
+            raise ValueError("Not in range")
     def forward(self, distance):
-        self.cmd("forward " + str(distance))
+        if(speed < 501 and speed > 19):
+            self.cmd("forward " + str(distance))
+        else:
+            raise ValueError("Not in range")
     def backward(self, distance):
-        self.cmd("back  " + str(distance))
+        if(speed < 501 and speed > 19):
+            self.cmd("back  " + str(distance))
+        else:
+            raise ValueError("Not in range")
+    def flip(self, direction):
+        if(direction == "r" or direction == "l" or direction == "f" or direction == "b"):
+            self.cmd("flip " + str(direction))
+        else:
+            raise ValueError("Please type 'f' (forward), 'b' (backward), 'r' (right) or 'l' (left) as flip direction.")
+    def rotate(self, direction, degrees):
+        if(direction == "cw" or direction == "ccw"):
+            if(degrees < 361 and degrees > 0):
+                self.cmd(str(direction) + " " + str(degrees))
+            else:
+                raise ValueError("Degrees are not in range")
+        else:
+            raise Exception("Please type 'cw' (Clockwise) or 'ccw' (Counterclockwise) as rotate direction.")
