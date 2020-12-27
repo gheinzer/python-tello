@@ -49,12 +49,12 @@ class tello():
             print("BATTERY STATE: " + str(self.battery) + "%")
         except:
             pass
-    def cmd(self, cmd, print=0):
+    def cmd(self, cmd, printcmd=0):
         # Send data
         cmd_old = cmd
         cmd = cmd.encode(encoding="utf-8") 
         sent = self.sock.sendto(cmd, self.tello_address)
-        if(print == 1):
+        if(printcmd == 1):
             print(str(cmd))
     def read_battery_level(self):
         self.cmd("battery?")
@@ -195,11 +195,14 @@ class tello():
     def land(self):
         self.cmd("land")
     def goToMP(self, mid, speed=100):
-        mx = self.missionpads[str(mid)]["x-position"]
-        my = self.missionpads[str(mid)]["y-position"]
-        mz = self.missionpads[str(mid)]["z-position"]
-        mid = "m" + str(mid)
-        drone.cmd("go " + str(mx) + " "  + str(my) + " " + str(mz) + " " + str(speed) + " " + str(mid))
+        if(str(mid) in self.missionpads):
+            mx = self.missionpads[str(mid)]["x-position"]
+            my = self.missionpads[str(mid)]["y-position"]
+            mz = self.missionpads[str(mid)]["z-position"]
+            mid = "m" + str(mid)
+            self.cmd("go " + str(mx) + " "  + str(my) + " " + str(mz) + " " + str(speed) + " " + str(mid))
+        else:
+            raise Exception("MissionPad " + str(mid) + " is not registered.")
     def MPR(self):
         MPRThread = threading.Thread(target=self._MP_registrator)
         MPRThread.start()
