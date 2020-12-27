@@ -99,7 +99,7 @@ class tello():
             state[int(y)] = x.split(":")
             y += 1
         return state
-    def MP_registrator(self):
+    def _MP_registrator(self):
         self.cmd("mon")
         time.sleep(1)
         self.cmd("mdirection 2")
@@ -159,7 +159,7 @@ class tello():
                         }
             except:
                 pass
-    def BatteryChecker(self):
+    def _BatteryChecker(self):
         logged_battery_30 = 0
         logged_battery_20 = 0
         while 1:
@@ -201,5 +201,8 @@ class tello():
         mid = "m" + str(mid)
         drone.cmd("go " + mx + " "  + my + " " + mz + " " + speed + " " + mid)
     def MPR(self):
-        MissionPadThread = threading.Thread(target=self.MP_registrator)
-        MissionPadThread.start()
+        MPRThread = threading.Thread(target=self._MP_registrator)
+        MPRThread.start()
+    def startBatteryChecker(self):
+        BatterryCheckerThread = threading.Thread(target=self._BatteryChecker)
+        BatterryCheckerThread.start()
