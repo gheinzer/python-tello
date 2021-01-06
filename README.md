@@ -3,11 +3,27 @@ This simple Library should help you controlling the TELLO EDU over WiFi with Pyt
 
 Tested on Windows 10.
 
+## Installation
+You can install this Library via PIP:
+```python
+pip install ryzetello
+```
+If you don't want to install the library via PIP, you can move the `tello.py` file to your working directory.
+
 ## How to import
+### When you moved the library to your working directory (not installed with PIP)
 ```python
 from tello import tello
 drone = tello([port=8890, ip="192.168.10.1"])
+#### Port
+Optional. Sets the port for controlling Tello and reading Data. Default is 8890.
+#### IP
+Optional. The IP adress for controlling Tello and reading Data. Default is 192.168.10.1.
 ```
+### When you installed the library via PIP
+```python
+import ryzetello
+drone = ryzetello.tello([port=8890, ip="192.168.10.1"])
 #### Port
 Optional. Sets the port for controlling Tello and reading Data. Default is 8890.
 #### IP
