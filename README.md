@@ -6,7 +6,7 @@ Tested on Windows 10.
 ## Installation
 You can install this Library via PIP:
 ```python
-pip install ryzetello
+pip install tello
 ```
 If you don't want to install the library via PIP, you can move the `tello.py` file to your working directory.
 
@@ -15,11 +15,12 @@ If you don't want to install the library via PIP, you can move the `tello.py` fi
 ```python
 from tello import tello
 drone = tello([port=8890, ip="192.168.10.1"])
+```
 #### Port
 Optional. Sets the port for controlling Tello and reading Data. Default is 8890.
 #### IP
 Optional. The IP adress for controlling Tello and reading Data. Default is 192.168.10.1.
-```
+
 ### When you installed the library via PIP
 ```python
 import ryzetello
