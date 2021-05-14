@@ -14,7 +14,7 @@ If you don't want to install the library via PIP, you can move the `tello.py` fi
 ### When you moved the library to your working directory (not installed with PIP)
 ```python
 from tello import tello
-drone = tello([port=8890, ip="192.168.10.1"])
+drone = tello(port=8890, ip="192.168.10.1")
 ```
 #### Port
 Optional. Sets the port for controlling Tello and reading Data. Default is 8890.
